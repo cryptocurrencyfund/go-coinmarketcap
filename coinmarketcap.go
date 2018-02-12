@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -51,7 +52,7 @@ func GetCoinData(coin string) (Coin, error) {
 }
 
 // GetAllCoinData get information about all coins listed in Coin Market Cap
-func GetAllCoinData(limit int) (map[string]Coin, error) {
+func GetAllCoinData(limit int) (map[int]Coin, error) {
 	var l string
 	if limit >= 0 {
 		l = fmt.Sprintf("?limit=%v", limit)
@@ -66,12 +67,28 @@ func GetAllCoinData(limit int) (map[string]Coin, error) {
 		return nil, err
 	}
 	// creating map from the array
-	allCoins := make(map[string]Coin)
+	allCoins := make(map[int]Coin)
 	for i := 0; i < len(data); i++ {
-		allCoins[data[i].ID] = data[i]
+		allCoins[data[i].Rank] = data[i]
 	}
 
 	return allCoins, nil
+}
+
+// GetAllCoinDataSorted get information about all coins listed in Coin Market Cap, sorted
+func GetAllCoinDataSorted(limit int) ([]Coin, error) {
+	allCoins, err := GetAllCoinData(limit)
+	var keys []int
+	var sortedCoins []Coin
+	for k := range allCoins {
+		keys = append(keys, k)
+	}
+	sort.Ints(keys)
+
+	for _, k := range keys {
+		sortedCoins = append(sortedCoins, allCoins[k])
+	}
+	return sortedCoins, err
 }
 
 // GetCoinGraphData get graph data points for a crypto currency

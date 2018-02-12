@@ -1,5 +1,9 @@
 package coinmarketcap
 
+import (
+	"fmt"
+)
+
 // Coin struct
 type Coin struct {
 	ID               string  `json:"id"`
@@ -18,6 +22,14 @@ type Coin struct {
 	LastUpdated      string  `json:"last_updated"`
 }
 
+func (c Coin) String() string {
+	return fmt.Sprintf("[%s(%s)]\n", c.Name, c.Symbol) +
+		fmt.Sprintf("Rank: %d\n", c.Rank) +
+		fmt.Sprintf("Price: $%.2f (%.4f btc)\n", c.PriceUsd, c.PriceBtc) +
+		fmt.Sprintf("Market Cap: $%.0f\n", c.MarketCapUsd) +
+		fmt.Sprintf("Changes: {1h %.2f%%} {24h %.2f%%} {7d %.2f%%}\n", c.PercentChange1h, c.PercentChange24h, c.PercentChange7d)
+}
+
 // GlobalMarketData struct
 type GlobalMarketData struct {
 	TotalMarketCapUsd            float64 `json:"total_market_cap_usd"`
@@ -26,6 +38,11 @@ type GlobalMarketData struct {
 	ActiveCurrencies             int     `json:"active_currencies"`
 	ActiveAssets                 int     `json:"active_assets"`
 	ActiveMarkets                int     `json:"active_markets"`
+}
+
+func (m GlobalMarketData) String() string {
+	return fmt.Sprintf("Total Market Cap: $%.2f\n", m.TotalMarketCapUsd) +
+		fmt.Sprintf("Total Market Volume: $%.2f\n", m.Total24hVolumeUsd)
 }
 
 // CoinGraph struct
