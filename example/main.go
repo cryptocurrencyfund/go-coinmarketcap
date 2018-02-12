@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	coinApi "github.com/miguelmota/go-coinmarketcap"
+	coinApi "github.com/cryptocurrencyfund/go-coinmarketcap"
 )
 
 func main() {
