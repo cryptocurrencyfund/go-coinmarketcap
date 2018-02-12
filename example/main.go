@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	coinApi "github.com/miguelmota/go-coinmarketcap"
 )
@@ -26,25 +25,25 @@ func main() {
 	}
 
 	// Get top 10 coins
-	top10, err := coinApi.GetAllCoinData(10)
+	top10, err := coinApi.GetAllCoinDataSorted(10)
 	if err != nil {
 		log.Println(err)
 	} else {
 		fmt.Println(top10)
 	}
 
-	var threeMonths int64 = (60 * 60 * 24 * 90)
-	now := time.Now()
-	secs := now.Unix()
-	start := secs - threeMonths
-	end := secs
+	// var threeMonths int64 = (60 * 60 * 24 * 90)
+	// now := time.Now()
+	// secs := now.Unix()
+	// start := secs - threeMonths
+	// end := secs
 
-	// Get graph data for coin
-	coinGraphData, err := coinApi.GetCoinGraphData("ethereum", start, end)
-	if err != nil {
-		log.Println(err)
-	} else {
-		fmt.Println(coinGraphData)
-	}
+	// // Get graph data for coin
+	// coinGraphData, err := coinApi.GetCoinGraphData("ethereum", start, end)
+	// if err != nil {
+	// 	log.Println(err)
+	// } else {
+	// 	fmt.Println(coinGraphData)
+	// }
 
 }
