@@ -33,12 +33,13 @@ func (c Coin) String() string {
 
 // MarkdownPrice MarkdownPrice
 func (c Coin) MarkdownPrice() string {
-	return fmt.Sprintf("* %s (%s) - $%.2f (%.4f btc) - %.2f%%\n", c.Symbol, c.Name, c.PriceUsd, c.PriceBtc, c.PercentChange24h)
+	return fmt.Sprintf("* **%s** (%s) - $%.2f (%.4f btc) `%.2f%%` weekly: `%.2f%%`\n",
+		c.Symbol, c.Name, c.PriceUsd, c.PriceBtc, c.PercentChange24h, c.PercentChange7d)
 }
 
 // MarkdownVolume MarkdownVolume
 func (c Coin) MarkdownVolume() string {
-	return fmt.Sprintf("* %s (%s) - $%.0f\n", c.Symbol, c.Name, c.Usd24hVolume)
+	return fmt.Sprintf("* *%s* (%s) - $%.0f\n", c.Symbol, c.Name, c.Usd24hVolume)
 }
 
 // GlobalMarketData struct
