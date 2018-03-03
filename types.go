@@ -39,7 +39,7 @@ func (c Coin) MarkdownPrice() string {
 
 // MarkdownVolume MarkdownVolume
 func (c Coin) MarkdownVolume() string {
-	return fmt.Sprintf("* *%s* (%s) - $%.0f\n", c.Symbol, c.Name, c.Usd24hVolume)
+	return fmt.Sprintf("* *%s* (%s) `$%.0f`\n", c.Symbol, c.Name, c.Usd24hVolume)
 }
 
 // GlobalMarketData struct
