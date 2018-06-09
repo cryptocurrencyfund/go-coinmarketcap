@@ -10,7 +10,7 @@ import (
 
 // Coin struct
 type Coin struct {
-	ID               string    `json:"id"`
+	CoinID           string    `json:"id"`
 	Date             time.Time `json:"date"`
 	DateStr          string    `json:"dateStr,string"`
 	Name             string    `json:"name"`
